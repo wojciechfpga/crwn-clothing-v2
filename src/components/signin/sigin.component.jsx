@@ -1,21 +1,27 @@
-// SignIn.js
 import { FcGoogle } from "react-icons/fc";
 import { signinWithGooglePopup } from "../../utils/firebase.util";
 import "./signin.component.scss";
+import { writeUserToDB } from "../../utils/firebase.util";
+import Form from "../singform/signform.component";
 
 export default function SignIn() {
     const signInGoogle = async () => {
-        const response = await signinWithGooglePopup();
-        console.log(response);
+        const { user } = await signinWithGooglePopup();
+        console.log(user);
+        await writeUserToDB(user);
     };
 
     return (
-        <div>
-            <p>Sign in</p>
-            <button className="googleButton" onClick={signInGoogle}>
-                <FcGoogle className="icon" /> {/* Ikona Google */}
-                Sign in with Google
-            </button>
+        <div className="signin-container">
+            <div className="signin-info">
+                <p>Sign in</p>
+                <button className="googleButton" onClick={signInGoogle}>
+                    <FcGoogle className="icon" />
+                    Sign in with Google
+                </button>
+            </div>
+            <div className="vertical-divider"></div> {/* Pionowy separator */}
+            <Form />
         </div>
     );
 }

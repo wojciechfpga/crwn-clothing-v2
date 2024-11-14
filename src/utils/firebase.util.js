@@ -2,7 +2,9 @@
 import { initializeApp } from "firebase/app";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
-import {getAuth,GoogleAuthProvider,signInWithPopup} from 'firebase/auth';
+import { getAuth, GoogleAuthProvider, signInWithPopup, createUserWithEmailAndPassword } from 'firebase/auth';
+
+import { getFirestore, doc, getDoc, setDoc } from "firebase/firestore";
 // Your web app's Firebase configuration
 const firebaseConfig = {
   apiKey: "AIzaSyAoRl0PXhgak80i7-Qw8KeUlL9ka7XdI_0",
@@ -16,10 +18,37 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 
-const provider= new GoogleAuthProvider();
+const provider = new GoogleAuthProvider();
 
-provider.setCustomParameters({prompt:"select_account"})
+provider.setCustomParameters({ prompt: "select_account" })
 
-export const auth=getAuth()
+export const auth = getAuth()
 
-export const signinWithGooglePopup =()=>signInWithPopup(auth,provider)
+const db = getFirestore(app);
+
+export const writeUserToDB = async (user,additional={AddtionalInfo:"None"}) => {   
+    const documentOfUser=doc(db,'users',user.uid)
+
+    const userFromDB=await getDoc(documentOfUser)
+    const {displayName,email}=user
+    if(!(userFromDB.exists()))
+    {
+      try{
+        await setDoc(documentOfUser,{
+          displayName,
+          email,
+          ...additional,
+        })
+      }
+      catch(error)
+      {
+
+      }
+    }
+}
+
+export const signinWithGooglePopup = () => signInWithPopup(auth, provider)
+
+export const  createUser=async (password,email)=>{
+  return await createUserWithEmailAndPassword(auth,email,password)
+}
