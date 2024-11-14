@@ -1,0 +1,30 @@
+// Podstawowe kolory
+$gray: #3a3a3a;
+$white: #ffffff;
+
+// Stylowanie nawigacji
+.navbar {
+  background-color: lightgrey;
+  padding: 1rem 2rem;
+  margin-bottom:10px;
+
+  &__container {
+    display: flex;
+    justify-content: space-around;
+  }
+
+  &__link {
+    color: dimgray;
+    text-decoration: none;
+    font-size: 1.2rem;
+    font-weight: bold;
+    padding: 0.5rem 1rem;
+    transition: color 0.3s ease, background-color 0.3s ease;
+
+    &:hover {
+      color: $gray;
+      background-color: $white;
+      border-radius: 5px;
+    }
+  }
+}
