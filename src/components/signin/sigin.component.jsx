@@ -3,7 +3,7 @@ import { signinWithGooglePopup } from "../../utils/firebase.util";
 import "./signin.component.scss";
 import { writeUserToDB } from "../../utils/firebase.util";
 import Form from "../singform/signform.component";
-
+import LoginForm from "../login/login.component";
 export default function SignIn() {
     const signInGoogle = async () => {
         const { user } = await signinWithGooglePopup();
@@ -22,6 +22,7 @@ export default function SignIn() {
             </div>
             <div className="vertical-divider"></div> {/* Pionowy separator */}
             <Form />
+            <LoginForm/>
         </div>
     );
 }
