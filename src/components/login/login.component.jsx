@@ -6,7 +6,7 @@ import Input from '../input/input.component';
 import { logoutUser } from '../../utils/firebase.util';
 
 const LoginForm = () => {
-  const { currentUser, setCurrentUser } = useContext(UserContext);
+  const { currentUser } = useContext(UserContext); // Zaledwie subskrybujemy stan użytkownika z kontekstu
   const [formData, setFormData] = useState({
     email: '',
     password: '',
@@ -19,21 +19,18 @@ const LoginForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const { user } = await loginUser(formData.email, formData.password);
-      console.log(user);
-      setCurrentUser(user); // Zapisz użytkownika w kontekście
+      await loginUser(formData.email, formData.password); // Firebase automatycznie zaktualizuje stan użytkownika
     } catch (error) {
       console.error('Login error:', error);
     }
   };
 
-  const handleLogout = async() => {
-    // Tu zaimplementuj logikę wylogowania
+  const handleLogout = async () => {
     console.log('Logout triggered');
-    setCurrentUser(null); // Wyczyszczenie kontekstu
-    await logoutUser()
+    await logoutUser();   // Firebase samodzielnie obsłuży stan użytkownika po wylogowaniu
   };
 
+  // Jeśli użytkownik jest zalogowany, wyświetlamy "Logout", w przeciwnym razie formularz logowania
   if (currentUser) {
     return (
       <div className="logout-container">
