@@ -2,7 +2,8 @@ import React from "react";
 import { Link } from "react-router-dom";
 import "./navbar.component.scss";
 import { Outlet } from "react-router-dom";
-
+import CardIcon from "../../components/card-icon/card-icon.component";
+import CartDropDown from "../../components/card-dropdown/card-dropdown.component";
 const Navigation = () => {
   return (
     <div>
@@ -17,6 +18,8 @@ const Navigation = () => {
         <Link to="/signin" className="navbar__link">
           Sign-in
         </Link>
+        <CardIcon/>
+        <CartDropDown/>
       </div>
     </nav>
     <Outlet/>

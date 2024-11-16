@@ -1,0 +1,23 @@
+.card-icon {
+    display: inline-flex; // Pozwala umieścić obok innych elementów w nagłówku.
+    align-items: center; // Centruje zawartość w pionie.
+    padding: 0.5rem 1rem; // Dodaje margines wewnętrzny.
+    background-color: #f5f5f5; // Jasnoszare tło.
+    border: 1px solid #e0e0e0; // Cienka, jasna ramka.
+    border-radius: 5px; // Zaokrąglone rogi.
+    color: #333; // Ciemnoszary tekst.
+    font-weight: bold; // Wyróżnia tekst.
+    font-size: 0.9rem; // Niewielki rozmiar czcionki.
+    cursor: pointer; // Wskazuje, że element jest klikalny.
+    transition: background-color 0.3s, color 0.3s; // Ładny efekt przejścia.
+  
+    &:hover {
+      background-color: #333; // Czarne tło przy najechaniu.
+      color: #fff; // Biały tekst na czarnym tle.
+    }
+  
+    p {
+      margin: 0; // Usuwa domyślny margines paragrafu.
+    }
+  }
+  
