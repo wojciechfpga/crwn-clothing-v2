@@ -5,6 +5,7 @@ import './categories.styles.scss';
 import Shop from './components/shop/shop.component';
 import Navigation from './routes/navigation-route/navigation.component';
 import SignIn from './components/signin/sigin.component';
+import Checkout from './routes/checkout/checkout.component';
 const App = () => {
 
 
@@ -14,6 +15,7 @@ const App = () => {
         <Route index element={<Home/>}/>
         <Route path='shop' element={<Shop/>}/>
         <Route path='signin' element={<SignIn/>}/>
+        <Route path='checkout' element={<Checkout />} />
       </Route>
     </Routes>
   );

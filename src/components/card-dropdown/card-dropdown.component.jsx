@@ -1,21 +1,28 @@
-import React from "react";
-import Button from "../button/button.component";
-import'./card-dropdown.component.scss'
-const CartDropDown = ({ onClose }) => {
-  const items = [
-    { id: 1, name: "Item 1", price: "$10" },
-    { id: 2, name: "Item 2", price: "$15" },
-    { id: 3, name: "Item 3", price: "$20" },
-    { id: 4, name: "Item 4", price: "$25" },
-  ]; // Przykładowe elementy koszyka
+import React from 'react';
+import { useNavigate } from 'react-router-dom';
+import Button from '../button/button.component';
+import { useContext } from 'react';
+import './card-dropdown.component.scss';
+import { CartContext } from '../../contexts/cart.context';
+import CartItem from '../cartitem/cart-item.component';
+const CartDropdown = () => {
+  const { cartItems } = useContext(CartContext);
+  const navigate = useNavigate();
+
+  const goToCheckoutHandler = () => {
+    navigate('/checkout');
+  };
 
   return (
-    <div className="cart-dropdown-container">
-      <div className="cart-items">
-      <Button buttonType='inverted'>Pay</Button>
+    <div className='cart-dropdown-container'>
+      <div className='cart-items'>
+        {cartItems.map((item) => (
+          <CartItem key={item.id} cartItem={item} />
+        ))}
       </div>
+      <Button onClick={goToCheckoutHandler}>GO TO CHECKOUT</Button>
     </div>
   );
 };
 
-export default CartDropDown;
+export default CartDropdown;

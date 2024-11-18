@@ -1,10 +1,12 @@
-import React from "react";
+import { useContext } from "react";
+import { CartContext } from "../../contexts/cart.context";
 import { Link } from "react-router-dom";
 import "./navbar.component.scss";
 import { Outlet } from "react-router-dom";
 import CardIcon from "../../components/card-icon/card-icon.component";
 import CartDropDown from "../../components/card-dropdown/card-dropdown.component";
 const Navigation = () => {
+  const {isCartOpen}=useContext(CartContext)
   return (
     <div>
     <nav className="navbar">
@@ -19,7 +21,7 @@ const Navigation = () => {
           Sign-in
         </Link>
         <CardIcon/>
-        <CartDropDown/>
+       { isCartOpen && <CartDropDown/>}
       </div>
     </nav>
     <Outlet/>
